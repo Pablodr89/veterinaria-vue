@@ -3,7 +3,7 @@
   import { uid } from 'uid'
   import Header from './components/Header.vue'
   import Formulario from './components/Formulario.vue'
-  import Paciente from './components/paciente.vue'
+  import Paciente from './components/Paciente.vue'
 
   let pacientes = ref([])
 
