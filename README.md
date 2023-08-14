@@ -1,6 +1,6 @@
-# Primer proyecto Vue
+# Segundo proyecto Vue
 
-Primer proyecto del curso de Vue.
+Segundo proyecto del curso de Vue.
 
 ## Para ver la web ingrese la siguiente URL:
 
