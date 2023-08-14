@@ -2,6 +2,6 @@
 
 Segundo proyecto del curso de Vue.
 
-## Para ver la web ingrese la siguiente URL:
+## Para ver la web haga click la siguiente URL:
 
 https://fastidious-empanada-ac8936.netlify.app
