@@ -1,5 +1,6 @@
 <script setup>
     import { ref, reactive } from 'vue'
+    import { computed } from 'vue';
     import Alerta from './Alerta.vue'
 
     let alerta = reactive({
@@ -27,14 +28,32 @@
         if(Object.values(props).includes('')) {
             alerta.mensaje = 'Todos los campos son obligatorios'
             alerta.tipo = 'error'
+
+            setTimeout(() => {
+                alerta.mensaje = ''
+                alerta.tipo = ''
+            },3000)
+            
             return
         } 
-        alerta.mensaje = 'Paciente registrado con éxito'
+
+        emit('guardar-paciente')
+
+        alerta.mensaje = 'Paciente almacenado con éxito'
         alerta.tipo = 'exito'
+        
+        setTimeout(() => {
+            alerta.mensaje = ''
+            alerta.tipo = ''
+        },3000)
     }
 
-    defineEmits(['update:nombre','update:propietario','update:email','update:alta','update:sintomas'])
+    let emit = defineEmits(['update:nombre','update:propietario','update:email','update:alta','update:sintomas','guardar-paciente'])
     let props = defineProps({
+        id: {
+            type: [String, null],
+            required: true
+        },
         nombre: {
             type: String,
             required: true
@@ -55,6 +74,14 @@
             type: String,
             required: true
         },
+    })
+
+    let editando = computed(() => {
+        return props.id
+    })
+
+    let eliminando = computed(() => {
+        return props.id
     })
 </script>
 
@@ -104,7 +131,7 @@
                 <textarea class="border-2 w-full p-2 mt-2 rounded-md h-40" id="sintomas" placeholder="Describe los sintomas de tu mascota" :value="sintomas" @input="$emit('update:sintomas', $event.target.value)"/>
             </div>
 
-            <input type="submit" class="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors" value="Registrar Paciente">
+            <input type="submit" class="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors" :value="[editando ? 'Editar Paciente' : 'Registrar Paciente']">
         </form>
     </div>
 </template>
